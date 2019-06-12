@@ -1,8 +1,8 @@
 import authReducer from "./authReducer";
 import projectReducer from "./projectReducer";
-import { combineReducer } from "redux";
+import { combineReducers } from "redux";
 
-const rootReducer = combineReducer({
+const rootReducer = combineReducers({
   auth: authReducer,
   project: projectReducer
 });

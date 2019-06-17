@@ -8,7 +8,7 @@ import { compose } from "redux";
 class Dashboard extends Component {
   render() {
     const projects = this.props;
-
+    console.log(projects)
     return (
       <div className="dashboard container">
         <div className="row">
@@ -24,12 +24,14 @@ class Dashboard extends Component {
   }
 }
 
+// state of the store. projects here can then be accessed in "dashboard"
 const mapStateToProps = state => {
   return {
     projects: state.firestore.ordered.projects
   };
 };
 
+// connect is used to connect to redux
 export default compose(
   connect(mapStateToProps),
   firestoreConnect([{ collection: "projects" }])

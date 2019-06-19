@@ -3,11 +3,15 @@ import { connect } from "react-redux";
 import { signIn } from "../../store/actions/authActions";
 import { Redirect } from "react-router-dom";
 import { firebase } from "react-redux-firebase";
+import LoadingBar from "react-top-loading-bar";
+import { useSpring } from "react-spring";
 
 class SignIn extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    loadingBarProgress: 0,
+    counter: 0
   };
 
   handleChange = e => {
@@ -18,8 +22,27 @@ class SignIn extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    //this.state = credentials (email and password)
-    this.props.signIn(this.state);
+    //creds = credentials (email and password)
+    const creds = {
+      email: this.state.email,
+      password: this.state.password
+    };
+    this.props.signIn(creds);
+  };
+
+  onLoaderFinished = () => {
+    this.setState({ loadingBarProgress: 0 })
+  }
+
+  add = value => {
+    this.setState({
+      loadingBarProgress: this.state.loadingBarProgress + value
+    });
+  };
+
+  //Haven't been able to figur out how to get the status-response from firebase for auth, hence the hardcoded progress.
+  smoothProgress = () => {
+    this.add(100);
   };
 
   render() {
@@ -28,6 +51,13 @@ class SignIn extends Component {
 
     return (
       <div className="container">
+        <LoadingBar
+          progress={this.state.loadingBarProgress}
+          height={3}
+          color="#ec407a"
+          onLoaderFinished={() => this.onLoaderFinished()}
+        />
+
         <form onSubmit={this.handleSubmit} className="white">
           <h5 className="grey-text text-darken-3">Sign in</h5>
           <div className="input-field">
@@ -39,12 +69,13 @@ class SignIn extends Component {
             <input type="password" id="password" onChange={this.handleChange} />
           </div>
           <div className="input-field">
-            <button className="btn pink lighten-1 z-depth-0">Login</button>
+            <button onClick={() => {this.smoothProgress()}} className="btn pink lighten-1 z-depth-0">Login</button>
             <div className="red-text center">
               {authError ? <p>{authError}</p> : null}
             </div>
           </div>
         </form>
+
       </div>
     );
   }

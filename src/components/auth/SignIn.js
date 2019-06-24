@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { signIn } from "../../store/actions/authActions";
 import { Redirect } from "react-router-dom";
-import { firebase } from "react-redux-firebase";
 import LoadingBar from "react-top-loading-bar";
-import { useSpring } from "react-spring";
 
 class SignIn extends Component {
   state = {

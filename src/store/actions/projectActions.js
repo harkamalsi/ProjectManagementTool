@@ -23,3 +23,25 @@ export const createProject = project => {
       });
   };
 };
+
+export const deleteProject = project => {
+  return (dispatch, getState, { getFirestore }) => {
+    const firestore = getFirestore();
+    const id = project.id;
+
+    const docRef = firestore.collection("projects").doc(id);
+
+    // if (docRef.get()) {
+    //   console.log("It is to be found");
+    // } else {
+    //   console.log("It is NOT to be found");
+    // }
+
+    docRef
+      .delete()
+      .then(() => dispatch({ type: "DELETE_PROJECT", project }))
+      .catch(err => {
+        dispatch({ type: "DELETE_PROJECT_ERROR", err });
+      });
+  };
+};

@@ -17,7 +17,7 @@ class ProjectDetails extends React.Component {
     setTimeout(() => {
       this.setState({ loaderCheck: false });
     }, 5000);
-  }
+  };
 
   onDelete = id => {
     let propsProject = { ...this.props.project, id };
@@ -100,7 +100,7 @@ class ProjectDetails extends React.Component {
             </div>
           </div>
           <div className="input-field">
-            <Link to="/">
+          <Link to="/signup">
               <button
                 style={{ marginTop: "5rem" }}
                 className="btn pink waves-effect waves-light lighten-1 z-depth-0"

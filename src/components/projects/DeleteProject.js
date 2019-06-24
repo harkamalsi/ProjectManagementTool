@@ -1,11 +1,11 @@
 import React from "react";
-import "font-awesome/css/font-awesome.min.css";
+import Modal from "../ui/Modal";
 
 const DeleteProject = props => {
   if (props.project && props.project.authorId === props.uid) {
     return (
-      <div onClick={() => props.onDelete(props.projectId)}>
-        <i className="black-text fa fa-trash" style={{ fontSize: "35px" }} />
+      <div style={{ position: "absolute", right: "40px", bottom: "10px"}}>
+        <Modal onDelete={props.onDelete} projectId={props.projectId} />
       </div>
     );
   } else {

@@ -1,7 +1,6 @@
 import React from "react";
 import "font-awesome/css/font-awesome.min.css";
 import M from "materialize-css";
-import { Link } from "react-router-dom";
 
 class Modal extends React.Component {
   componentDidMount = () => {

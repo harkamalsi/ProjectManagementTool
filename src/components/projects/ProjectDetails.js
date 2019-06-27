@@ -21,9 +21,8 @@ class ProjectDetails extends React.Component {
 
   onDelete = id => {
     let propsProject = { ...this.props.project, id };
-
     this.props.deleteProject(propsProject);
-    //this.props.history.push("/");
+    this.props.history.push("/signup");
   };
 
   displayNotAvailable = () => {
